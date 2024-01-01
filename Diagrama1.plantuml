@@ -1,13 +1,15 @@
 @startuml diagrama
 
 class Usuario {
+  +APP:USER
   +id: int
   +nombre: string
   +comercio: Comercio
   
 }
 
-class Comercio {
+class Comercio{
+  +APP:RESTAURANT
   +id: int
   +nombre: string
   +mesas: List<Mesa>
@@ -18,34 +20,39 @@ class Comercio {
   +generarQR(cantMesas:int) 
 }
 
-class Mesa {
-  +numero: int
+class Mesa{
+  +APP:RESTAURANT
+  +id: int
   +qrCode: string
 
 
 }
 
-class Carta {
+class Carta{
+  +APP:MENU
   +id: int
   +items: List<ItemCarta>
 
   +agregarItem(item: ItemCarta): void
 }
 
-class ItemCarta {
+class ItemCarta{
+  +APP:MENU
   +id: int
   +nombre: string
   +precio: double
 }
 
-class Consumidor {
+class Consumidor{
+  +APP:CLIENT
   +id: int
   +nombre: string
 
   +realizarPedido(mesa: Mesa, items: List<ItemCarta>): Pedido
 }
 
-class Pedido {
+class Pedido{
+  +APP:ORDER
   +id: int
   +items: List<ItemCArta>
   +montoTotal: double
@@ -57,13 +64,15 @@ class Pedido {
   +pagarPedido(): Ticket
 }
 
-class SistemaPago {
+class SistemaPago{
+  +APP:PAYMENTS
 
   +realizarPago(pedido: Pedido): Ticket
 
 }
 
-class Ticket {
+class Ticket{
+  +APP:PAYMENTS
   +id: int
   +detalle: string
   +monto: double
