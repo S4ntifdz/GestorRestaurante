@@ -1,0 +1,82 @@
+@startuml diagrama
+
+class Usuario {
+  +id: int
+  +nombre: string
+  +comercio: Comercio
+  
+}
+
+class Comercio {
+  +id: int
+  +nombre: string
+  +mesas: List<Mesa>
+  +carta: Carta
+
+  +crearMesa(numero: int): Mesa
+  +crearCarta(): Carta
+  +generarQR(cantMesas:int) 
+}
+
+class Mesa {
+  +numero: int
+  +qrCode: string
+
+
+}
+
+class Carta {
+  +id: int
+  +items: List<ItemCarta>
+
+  +agregarItem(item: ItemCarta): void
+}
+
+class ItemCarta {
+  +id: int
+  +nombre: string
+  +precio: double
+}
+
+class Consumidor {
+  +id: int
+  +nombre: string
+
+  +realizarPedido(mesa: Mesa, items: List<ItemCarta>): Pedido
+}
+
+class Pedido {
+  +id: int
+  +items: List<ItemCArta>
+  +montoTotal: double
+  +hora : Date
+  +estado: string
+
+  +confirmarPedido(): void
+  +cancelarPedido(): void
+  +pagarPedido(): Ticket
+}
+
+class SistemaPago {
+
+  +realizarPago(pedido: Pedido): Ticket
+
+}
+
+class Ticket {
+  +id: int
+  +detalle: string
+  +monto: double
+  +fecha: Date
+}
+
+Usuario -- Comercio
+Comercio -- Mesa
+Comercio -- Carta
+Carta -- ItemCarta
+Consumidor -- Pedido
+Pedido -- ItemCarta
+Pedido -- SistemaPago
+SistemaPago -- Ticket
+
+@enduml
